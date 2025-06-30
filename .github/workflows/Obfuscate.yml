@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  update-and-obfuscate:
+  build:
     runs-on: ubuntu-latest
 
     steps:
