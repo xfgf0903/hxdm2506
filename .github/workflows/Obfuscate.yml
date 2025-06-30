@@ -67,17 +67,19 @@ jobs:
         run: |
           javascript-obfuscator origin.js --output _worker.js \
           --compact true \
-          --control-flow-flattening true \
-          --control-flow-flattening-threshold 1 \
-          --dead-code-injection true \
-          --dead-code-injection-threshold 1 \
-          --identifier-names-generator hexadecimal \
+          --control-flow-flattening false \
+          --dead-code-injection false \
+          --identifier-names-generator mangled \
           --rename-globals true \
           --string-array true \
-          --string-array-encoding 'rc4' \
-          --string-array-threshold 1 \
-          --transform-object-keys true \
-          --unicode-escape-sequence true          
+          --string-array-encoding 'base64' \
+          --string-array-threshold 0.6 \
+          --self-defending true \
+          --debug-protection true \
+
+     - name: 写入或更新 version.txt
+        run: |
+          echo "${{ env.latest_tag }}" > version.txt     
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
