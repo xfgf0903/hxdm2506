@@ -1,18 +1,15 @@
 name: Build Obfuscate BPB Panel
 
 on:
-  push:
-    branches:
-      - main
   schedule:
-        # Runs everyday at 1:00 AM
-        - cron: "0 1 * * *"
+    - cron: '0 0 * * *'   # 每天00:00 UTC运行
+  workflow_dispatch:      # 允许手动触发
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  update-and-obfuscate:
     runs-on: ubuntu-latest
 
     steps:
@@ -81,7 +78,7 @@ jobs:
         run: |
           echo "${{ env.latest_tag }}" > version.txt     
 
-      - name: Commit changes
+      - name: 提交更改
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: main
