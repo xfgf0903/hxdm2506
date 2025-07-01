@@ -59,7 +59,7 @@ jobs:
       - name: 下载最新版 worker.js
         run: |
           curl -L -o origin.js "https://github.com/bia-pain-bache/BPB-Worker-Panel/releases/download/${{ env.latest_tag }}/worker.js"
-
+          
       - name: 混淆 JS 代码
         run: |
           javascript-obfuscator origin.js --output _worker.js \
