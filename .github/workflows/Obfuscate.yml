@@ -43,7 +43,7 @@ jobs:
           
           if [ "$current_version" != "$latest_tag" ]; then
             echo "需要更新"
-            curl -L -o origin.js "https://github.com/bia-pain-bache/BPB-Worker-Panel/releases/download/${{ env.latest_tag }}/worker.js"
+            curl -fL -o origin.js "https://github.com/bia-pain-bache/BPB-Worker-Panel/releases/download/${{ env.latest_tag }}/worker.js"
             
             # 混淆 JS 代码
             javascript-obfuscator origin.js --output _worker.js \
