@@ -181,22 +181,3 @@ jobs:
           name: obfuscated-worker
           path: _worker.js
           retention-days: 7
-
-      - name: 通知 Slack（可选）
-  if: success() && env.should_update == 'true' && steps.check_changes.outputs.has_changes == 'true' && secrets.SLACK_WEBHOOK_URL != ''
-  uses: slackapi/slack-github-action@v1.24.0
-  with:
-    channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-    payload: >
-      {
-        "text": ":rocket: BPB Worker 已更新到版本 ${{ env.latest_tag }}",
-        "attachments": [
-          {
-            "title": "查看变更",
-            "title_link": "${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}",
-            "color": "#36a64f"
-          }
-        ]
-      }
-  env:
-    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
